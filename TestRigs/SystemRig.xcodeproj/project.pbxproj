@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F320C6214360B46004783DB /* ATSystemDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C6114360B46004783DB /* ATSystemDebugView.m */; };
+		4F4DCD0E160C106C006D9CC8 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4DCD0D160C106C006D9CC8 /* GLKit.framework */; };
 		4F80D48414354ADF00D9332C /* ATSystemState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F80D48314354ADF00D9332C /* ATSystemState.m */; };
 		4F80D488143561AC00D9332C /* ATSystemParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F80D487143561AC00D9332C /* ATSystemParams.m */; };
 		4FA4D6C114302355003958B3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FA4D6C014302355003958B3 /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 		4F21152A143197B600B2F51F /* ATSystemRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemRenderer.h; sourceTree = "<group>"; };
 		4F320C6014360B46004783DB /* ATSystemDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemDebugView.h; sourceTree = "<group>"; };
 		4F320C6114360B46004783DB /* ATSystemDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSystemDebugView.m; sourceTree = "<group>"; };
+		4F4DCD0D160C106C006D9CC8 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4F80D48214354ADF00D9332C /* ATSystemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemState.h; sourceTree = "<group>"; };
 		4F80D48314354ADF00D9332C /* ATSystemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSystemState.m; sourceTree = "<group>"; };
 		4F80D486143561AC00D9332C /* ATSystemParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystemParams.h; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4DCD0E160C106C006D9CC8 /* GLKit.framework in Frameworks */,
 				4FA4D6C114302355003958B3 /* UIKit.framework in Frameworks */,
 				4FA4D6C314302355003958B3 /* Foundation.framework in Frameworks */,
 				4FA4D6C514302355003958B3 /* CoreGraphics.framework in Frameworks */,
@@ -115,6 +118,7 @@
 		4FA4D6BF14302355003958B3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F4DCD0D160C106C006D9CC8 /* GLKit.framework */,
 				4FA4D6C014302355003958B3 /* UIKit.framework */,
 				4FA4D6C214302355003958B3 /* Foundation.framework */,
 				4FA4D6C414302355003958B3 /* CoreGraphics.framework */,

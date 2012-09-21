@@ -10,6 +10,7 @@
 		4F320C431435AA1E004783DB /* ATSystemParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C401435AA1E004783DB /* ATSystemParams.m */; };
 		4F320C441435AA1E004783DB /* ATSystemState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C421435AA1E004783DB /* ATSystemState.m */; };
 		4F320C521435BC13004783DB /* ATEnergy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C511435BC13004783DB /* ATEnergy.m */; };
+		4F4DCD07160C104B006D9CC8 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4DCD06160C104B006D9CC8 /* GLKit.framework */; };
 		4F9FB5C8142AB0480032AF67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FB5C7142AB0480032AF67 /* UIKit.framework */; };
 		4F9FB5CA142AB0480032AF67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FB5C9142AB0480032AF67 /* Foundation.framework */; };
 		4F9FB5CC142AB0480032AF67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F9FB5CB142AB0480032AF67 /* CoreGraphics.framework */; };
@@ -40,6 +41,7 @@
 		4F320C421435AA1E004783DB /* ATSystemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSystemState.m; sourceTree = "<group>"; };
 		4F320C501435BC13004783DB /* ATEnergy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEnergy.h; sourceTree = "<group>"; };
 		4F320C511435BC13004783DB /* ATEnergy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATEnergy.m; sourceTree = "<group>"; };
+		4F4DCD06160C104B006D9CC8 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4F5467F61441B31E006A260F /* PSArborTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSArborTouch.h; sourceTree = "<group>"; };
 		4F9FB5C3142AB0480032AF67 /* KernelRig.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KernelRig.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F9FB5C7142AB0480032AF67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -85,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4DCD07160C104B006D9CC8 /* GLKit.framework in Frameworks */,
 				4F9FB5C8142AB0480032AF67 /* UIKit.framework in Frameworks */,
 				4F9FB5CA142AB0480032AF67 /* Foundation.framework in Frameworks */,
 				4F9FB5CC142AB0480032AF67 /* CoreGraphics.framework in Frameworks */,
@@ -115,6 +118,7 @@
 		4F9FB5C6142AB0480032AF67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F4DCD06160C104B006D9CC8 /* GLKit.framework */,
 				4F9FB5C7142AB0480032AF67 /* UIKit.framework */,
 				4F9FB5C9142AB0480032AF67 /* Foundation.framework */,
 				4F9FB5CB142AB0480032AF67 /* CoreGraphics.framework */,

@@ -11,6 +11,7 @@
 		4F320C3414359122004783DB /* ATSystemParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C3114359122004783DB /* ATSystemParams.m */; };
 		4F320C3514359122004783DB /* ATSystemState.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C3314359122004783DB /* ATSystemState.m */; };
 		4F320C4F1435BBB3004783DB /* ATEnergy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F320C4E1435BBB3004783DB /* ATEnergy.m */; };
+		4F4DCD00160C1020006D9CC8 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4DCCFF160C1020006D9CC8 /* GLKit.framework */; };
 		4F98C72D1426F73C00EA18F3 /* ATSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F98C72C1426F73C00EA18F3 /* ATSystem.m */; };
 		4F98C7381427040300EA18F3 /* ATNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F98C7371427040300EA18F3 /* ATNode.m */; };
 		4F98C73C1427041700EA18F3 /* ATEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F98C73B1427041700EA18F3 /* ATEdge.m */; };
@@ -42,6 +43,7 @@
 		4F320C3314359122004783DB /* ATSystemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSystemState.m; sourceTree = "<group>"; };
 		4F320C4D1435BBB3004783DB /* ATEnergy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATEnergy.h; sourceTree = "<group>"; };
 		4F320C4E1435BBB3004783DB /* ATEnergy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATEnergy.m; sourceTree = "<group>"; };
+		4F4DCCFF160C1020006D9CC8 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4F5D4F5C143E5DFE00E0A6BC /* PSArborTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSArborTouch.h; sourceTree = "<group>"; };
 		4F98C72B1426F73C00EA18F3 /* ATSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATSystem.h; sourceTree = "<group>"; };
 		4F98C72C1426F73C00EA18F3 /* ATSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATSystem.m; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F4DCD00160C1020006D9CC8 /* GLKit.framework in Frameworks */,
 				4FA2247D1426D0900078EFB6 /* UIKit.framework in Frameworks */,
 				4FA2247F1426D0900078EFB6 /* Foundation.framework in Frameworks */,
 				4FA224811426D0900078EFB6 /* CoreGraphics.framework in Frameworks */,
@@ -194,6 +197,7 @@
 		4FA2247B1426D0900078EFB6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F4DCCFF160C1020006D9CC8 /* GLKit.framework */,
 				4FA2247C1426D0900078EFB6 /* UIKit.framework */,
 				4FA2247E1426D0900078EFB6 /* Foundation.framework */,
 				4FA224801426D0900078EFB6 /* CoreGraphics.framework */,
