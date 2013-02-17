@@ -119,7 +119,25 @@
         
         // Drawing code for springs
         for (ATSpring *spring in self.system.physics.springs) {
-            [self drawSpring:spring inContext:context];            
+          //  NSLog(@"spring:%@",spring.userData);
+            
+            if ([[spring.userData valueForKey:@"nodeType"] isEqualToString:@"super"]) {
+                CGContextSetRGBStrokeColor(context, 0.0, 1.0, 1.0, 1.0); // black line
+                CGContextSetLineWidth(context, 20.0);
+                
+            }else if ([[spring.userData valueForKey:@"nodeType"] isEqualToString:@"major"]){
+                CGContextSetRGBStrokeColor(context, 1.0, 1.0, 0.0, 1.0); // black line
+                CGContextSetLineWidth(context, 10.0);
+            }else if ([[spring.userData valueForKey:@"nodeType"] isEqualToString:@"minor"]){
+                CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0); // black line
+                CGContextSetLineWidth(context, 1.0);
+            }else{
+                CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0); // black line
+                CGContextSetLineWidth(context, 1.0);
+            }
+
+             [self drawSpring:spring inContext:context];     
+                  
         }
         
         CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0); // red line for node box
@@ -138,6 +156,8 @@
         
     }
 }
+
+
 
 
 #pragma mark - Internal Interface

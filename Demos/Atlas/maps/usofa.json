@@ -1,17 +1,21 @@
 {
     "edges": {
         "Bupa Australia": {
+            "userData": { "nodeType": "super"},
             "i": {},
             "b": {},
             "c": {}
         },
         "c": {
+            "userData": { "nodeType": "minor"},
             "d": {}
         },
         "b": {
+             "userData": { "nodeType": "major"},
             "c": {},
             "g": {}
         }
-    },
+    }
+
 }
 

@@ -13,15 +13,13 @@
 @class ATSystem;
 @class AtlasCanvasView;
 
-@interface AtlasViewController : UIViewController <ATDebugRendering, UIGestureRecognizerDelegate>
+@interface AtlasViewController : UIViewController <ATDebugRendering, UIGestureRecognizerDelegate,UIScrollViewDelegate>
 {
-    
+    id userData;
 
 @private
     ATSystem    *system_;
     AtlasCanvasView *canvas_;
 }
-
-//@property (nonatomic, retain) IBOutlet AtlasCanvasView *canvas;
 
 @end

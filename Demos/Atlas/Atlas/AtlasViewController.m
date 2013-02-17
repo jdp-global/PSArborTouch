@@ -36,35 +36,15 @@
     [super viewDidLoad];
     
     
-    
-   /* UIScrollView *mainSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,320,320)];
-    [mainSV setBackgroundColor:[UIColor greenColor]];
-   // [mainSV setPagingEnabled:YES];
-    //[mainSV setDirectionalLockEnabled:YES];
-    [mainSV setShowsHorizontalScrollIndicator:YES];
-    [mainSV setShowsVerticalScrollIndicator:YES];
-   // [mainSV setDelegate:self];
-    [mainSV setContentSize:CGSizeMake(6000,6000)];
-    [mainSV setMinimumZoomScale:0.5];
-    [mainSV setMaximumZoomScale:3.0];
-    
-    [self.view addSubview:mainSV];
-    
-    // background - boy and girl
-    UIImageView *ballIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"soccer_ball"]];
-    [ballIV setFrame:CGRectMake(210,200,50 ,50)];
-    [mainSV addSubview:ballIV];
-*/
-
-    
+       
     CGRect frame = self.view.bounds;
     frame.origin.y =44;
     frame.size.height -=44;
     frame.size.width -=100;
     
     canvas_ = [[AtlasCanvasView alloc]initWithFrame:frame];
-    
     canvas_.autoresizesSubviews = YES;
+    canvas_.delegate = self;
     canvas_.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
     canvas_.showsHorizontalScrollIndicator = YES;
     canvas_.showsVerticalScrollIndicator = YES;
@@ -96,10 +76,10 @@
     // Configure simulation parameters, (take a copy, modify it, update the system when done.)
     ATSystemParams *params = system_.parameters;
     
-    params.repulsion = 10.0;
+    params.repulsion = 100.0;
     params.stiffness = 10.0;
     params.friction  = 0.2;
-    params.precision = 0.1;
+    params.precision = 0.6;
     
     system_.parameters = params;
     
@@ -185,24 +165,33 @@
                 // the nodes when it finds they have not been previously defined.  Not the optimal way to 
                 // go about things but easy.
                 
-                NSDictionary *edges = [theObject objectForKey:@"edges"];
+                NSMutableDictionary *edges = [NSMutableDictionary dictionaryWithDictionary:[theObject objectForKey:@"edges"]];
                 
+                NSLog(@"edges:%@",edges);
                 // Lets see how the system handles concurrent graph loading (NSEnumerationConcurrent)
                 // The simulation should handle this correctly.
+              
                 [edges enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
-                    
+                   
                     NSString *source = key;
                     NSDictionary *targets = obj;
                     
                     // How about an extra measure of concurrency within the concurrency.
+                    NSLog(@"source:%@",source);
+                    NSLog(@"targets:%@",targets);
+                    
+                    NSMutableDictionary *userDataDict = [targets objectForKey:@"userData"];
+                    
                     [targets enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
                         
-                        // DEBUG: Enable to see the concurrency in all its glory
                         NSLog(@"Source %@ -> %@", source, key);
                         
-                        // Create the edge, and by proxy, create the nodes
-                        [system_ addEdgeFromNode:source toNode:key withData:nil];
+                        if (![key isEqualToString:@"userData"]) {
+                            // Create the edge, and by proxy, create the nodes
+                            [system_ addEdgeFromNode:source toNode:key withData:userDataDict];
+                        }
                         
+           
                     }];
                 
                 }];
@@ -349,6 +338,19 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     
     // start the simulation
     [system_ start:YES];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSLog(@"scrollViewWillBeginDragging");
+
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
 }
 
 -(void)removeNodeClicked{

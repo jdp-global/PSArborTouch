@@ -187,6 +187,7 @@
 {
     // stop the simulation
     return;
+    
     paused_ = YES;
     
     BOOL timerInitialized = (timer_ != nil);
