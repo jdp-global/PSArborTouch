@@ -300,6 +300,8 @@
     } else {
         
         ATParticle *node = [[ATParticle alloc] initWithName:name userData:data];
+        node.particleView =  [[UIView alloc]initWithFrame:CGRectMake(-22, -22, 44, 44)];
+        [node.particleView setBackgroundColor:[UIColor yellowColor]];
         
         node.position = CGPointRandom(1.0);
         

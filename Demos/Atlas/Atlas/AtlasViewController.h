@@ -15,6 +15,7 @@
 
 @interface AtlasViewController : UIViewController <ATDebugRendering, UIGestureRecognizerDelegate>
 {
+    UIButton *addNode;
 
 @private
     ATSystem    *system_;

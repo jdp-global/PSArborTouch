@@ -10,12 +10,13 @@
 
 @class ATSystem;
 
-@interface AtlasCanvasView : UIView
+@interface AtlasCanvasView : UIScrollView
 {
 @private
     ATSystem *system_;
     BOOL debugDrawing_;
     UIFont *font_;
+    UIImage *ball;
 }
 
 @property (nonatomic, retain) ATSystem *system;

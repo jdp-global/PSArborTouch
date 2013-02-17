@@ -36,16 +36,26 @@
 {
     [super viewDidLoad];
     
+    
+    addNode = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addNode setFrame:CGRectMake(0, 10, 320, 46)];
+
+    [addNode setBackgroundColor:[UIColor redColor]];
+
+    [addNode addTarget:self action:@selector(addNodeClicked)  forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:addNode];
+    
     // Create our particle system
-    system_ = [[[ATSystem alloc] init] retain];
+    system_ = [[ATSystem alloc] init];
+    
     
     // Configure simulation parameters, (take a copy, modify it, update the system when done.)
     ATSystemParams *params = system_.parameters;
     
-    params.repulsion = 1000.0;
-    params.stiffness = 600.0;
-    params.friction  = 0.5;
-    params.precision = 0.4;
+    params.repulsion = 10.0;
+    params.stiffness = 10.0;
+    params.friction  = 0.2;
+    params.precision = 0.1;
     
     system_.parameters = params;
     
@@ -131,13 +141,13 @@
                 // For example, node creation might be in the GCD queue but when we query if it exists, it
                 // has not made it there yet.
                 
-                NSDictionary *nodes = [theObject objectForKey:@"nodes"];
+               /* NSDictionary *nodes = [theObject objectForKey:@"nodes"];
                 
                 [nodes enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
                     
                     [system_ addNode:key withData:nil];
                     
-                }];
+                }];*/
                 
                 // Comment out the code above to see this example.
                 // Instead of loading the nodes, lets just load the edges and have the system construct
@@ -157,7 +167,7 @@
                     [targets enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
                         
                         // DEBUG: Enable to see the concurrency in all its glory
-//                        NSLog(@"Source %@ -> %@", source, key);
+                        NSLog(@"Source %@ -> %@", source, key);
                         
                         // Create the edge, and by proxy, create the nodes
                         [system_ addEdgeFromNode:source toNode:key withData:nil];
@@ -320,6 +330,47 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // start the simulation
     [system_ start:YES];
 }
+
+
+-(void)addNodeClicked{
+    NSLog(@"test");
+
+    uint32_t rnd0 = arc4random_uniform([system_.state.nodes count]);
+    uint32_t rnd1 = arc4random_uniform([system_.state.nodes count]);
+    ATNode *randomNode0 = [system_.state.nodes objectAtIndex:rnd0];
+    ATNode *randomNode1 = [system_.state.nodes objectAtIndex:rnd1];
+    
+    NSNumber *src = randomNode0.index;
+    NSNumber *dst = randomNode1.index;
+    NSString *srcName = randomNode0.name;
+    NSString *dstName = randomNode1.name;
+    
+    NSMutableDictionary *from = [system_.state getAdjacencyObjectForKey:src];
+    
+    // Does the edge already exist?
+    ATEdge *to = [from objectForKey:dst];
+     if (to != nil) {
+         uint32_t rndapha = arc4random_uniform(26);
+         
+          NSArray *alphabet = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",
+                               @"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T"@"U",@"V",@"W",@"X",@"Y",@"Z",nil];
+         NSString *a = [alphabet objectAtIndex:rndapha];
+         
+          to = [from objectForKey:a];
+         if (to != nil) {
+           [self addNodeClicked]; //try another random node
+             return;
+         }
+         [system_ addEdgeFromNode:[a copy] toNode:[dstName copy] withData:nil];
+         [canvas_ layoutSubviews];
+     }else{
+         [system_ addEdgeFromNode:[srcName copy] toNode:[dstName copy] withData:nil];
+         [canvas_ layoutSubviews];
+     }
+    
+    
+}
+
 
 
 //- (void) rotateHandler:(UIRotationGestureRecognizer *)gestureRecognizer

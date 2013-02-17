@@ -38,11 +38,14 @@
 @synthesize system = system_;
 @synthesize debugDrawing = debugDrawing_;
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
         // Initialization code
+        NSLog(@"ok");
+      
+        
     }
     return self;
 }
@@ -58,7 +61,29 @@
 - (void) layoutSubviews
 {
     // Handle size changes
+  
+    
+    //CGRect frame = self.frame;
+    self.autoresizesSubviews = YES;
+    self.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
+    self.showsHorizontalScrollIndicator = YES;
+    self.showsVerticalScrollIndicator = YES;
+    [self setBackgroundColor:[UIColor blueColor]];
+    [self setContentSize:CGSizeMake(2000, 2000)];
     self.system.viewBounds = self.bounds;
+    
+    
+    // Drawing code for particle centers
+    //need to move this to into init
+    for (ATParticle *particle in self.system.physics.particles) {
+        [particle.particleView removeFromSuperview];
+    }
+    
+    for (ATParticle *particle in self.system.physics.particles) {
+    
+        [self addSubview:particle.particleView];
+    }
+
 }
 
 - (void) drawRect:(CGRect)rect
@@ -104,13 +129,16 @@
         CGContextSetRGBStrokeColor(context, 1.0, 0.0, 0.0, 1.0); // red line for node box
         CGContextSetLineWidth(context, 2.0);
         
-        // Drawing code for particle centers
+        // Drawing code for particle centers 
         for (ATParticle *particle in self.system.physics.particles) {
-            
-            [self drawParticleText:particle inContext:context];
-            
-//            [self drawParticle:particle inContext:context];            
+
+            [self updateParticleViewPosition:particle];
+
         }
+        
+        
+
+        
         
     }
 }
@@ -188,6 +216,7 @@
 
 - (void) drawParticle:(ATParticle *)particle inContext:(CGContextRef)context
 {
+    NSLog(@"drawParticle");
     // Translate the particle position to screen coordinates
     CGPoint pOrigin = [self pointToScreen:particle.position];
     
@@ -195,11 +224,26 @@
     CGRect strokeRect = CGRectMake(pOrigin.x, pOrigin.y, 0.0, 0.0);
     
     // Expand the rect around the center
-    strokeRect = CGRectInset(strokeRect, -5.0, -5.0);
+    strokeRect = CGRectInset(strokeRect, -25.0, -25.0);
     
     // Draw the rect    
     CGContextStrokeRect(context, strokeRect);
+
+    //[ball drawInRect:strokeRect];
 }
+
+- (void)updateParticleViewPosition:(ATParticle *)particle
+{
+    //NSLog(@"updateParticlePosition");
+    // Translate the particle position to screen coordinates
+    CGPoint pOrigin = [self pointToScreen:particle.position];
+    
+    CGRect frame = particle.particleView.frame;
+    frame.origin = pOrigin;
+    [particle.particleView setFrame:frame];
+    
+}
+
 
 - (void) drawParticleText:(ATParticle *)particle inContext:(CGContextRef)context
 {

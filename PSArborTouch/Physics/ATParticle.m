@@ -21,17 +21,37 @@
 @synthesize force       = force_;
 @synthesize tempMass    = tempMass_;
 @synthesize connections = connections_;
+@synthesize particleView = particleView_;
 
 - (id) init
 {
     self = [super init];
     if (self) {
+    
         velocity_       = CGPointZero;
         force_          = CGPointZero;
         tempMass_       = 0.0;
         connections_    = 0;
     }
     return self;
+}
+
+- (id) initWithParticleFrame:(CGRect)frame
+{
+    self = [super init];
+    if (self) {
+   
+        velocity_       = CGPointZero;
+        force_          = CGPointZero;
+        tempMass_       = 0.0;
+        connections_    = 0;
+    }
+    return self;
+}
+-(void)dealloc{
+    self.particleView = nil;
+    if (particleView_ !=nil)[particleView_ release];
+    [super dealloc];
 }
 
 - (id) initWithVelocity:(CGPoint)velocity 

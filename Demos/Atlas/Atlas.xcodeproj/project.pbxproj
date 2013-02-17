@@ -46,6 +46,8 @@
 		4F54695A1441B490006A260F /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F54694D1441B490006A260F /* CJSONDeserializer.m */; };
 		4F54695B1441B490006A260F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F54694F1441B490006A260F /* CJSONScanner.m */; };
 		4F54695C1441B490006A260F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5469511441B490006A260F /* CJSONSerializer.m */; };
+		83424E4716D04A2F00A9E923 /* usofa0.json in Resources */ = {isa = PBXBuildFile; fileRef = 83424E4616D04A2F00A9E923 /* usofa0.json */; };
+		83424E4B16D04F9500A9E923 /* soccer_ball.png in Resources */ = {isa = PBXBuildFile; fileRef = 83424E4A16D04F9500A9E923 /* soccer_ball.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +118,8 @@
 		4F5469501441B490006A260F /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		4F5469511441B490006A260F /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
 		4F5469521441B490006A260F /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		83424E4616D04A2F00A9E923 /* usofa0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = usofa0.json; sourceTree = "<group>"; };
+		83424E4A16D04F9500A9E923 /* soccer_ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = soccer_ball.png; path = ../../../../../../Desktop/soccer_ball.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,7 @@
 		4F4D9F8C1439DAFD00AAB205 /* Atlas */ = {
 			isa = PBXGroup;
 			children = (
+				83424E4A16D04F9500A9E923 /* soccer_ball.png */,
 				4F4D9FA81439DB5200AAB205 /* Controller */,
 				4F4D9FA71439DB4F00AAB205 /* View */,
 				4F4D9FA61439DB4B00AAB205 /* Model */,
@@ -315,6 +320,7 @@
 				4F4DA0E81439E2BF00AAB205 /* mideast.json */,
 				4F4DA0E91439E2BF00AAB205 /* risk.json */,
 				4F4DA0EA1439E2BF00AAB205 /* usofa.json */,
+				83424E4616D04A2F00A9E923 /* usofa0.json */,
 			);
 			name = Maps;
 			path = maps;
@@ -433,6 +439,8 @@
 				4F4DA0F91439E2E300AAB205 /* back-button-light.png in Resources */,
 				4F4DA0FA1439E2E300AAB205 /* home-arrow.png in Resources */,
 				4F4DA0FB1439E2E300AAB205 /* logo.png in Resources */,
+				83424E4716D04A2F00A9E923 /* usofa0.json in Resources */,
+				83424E4B16D04F9500A9E923 /* soccer_ball.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +561,7 @@
 				INFOPLIST_FILE = "Atlas/Atlas-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -566,6 +575,7 @@
 				INFOPLIST_FILE = "Atlas/Atlas-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

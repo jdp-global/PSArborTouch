@@ -18,7 +18,7 @@
     
     NSUInteger  connections_;
 }
-
+@property (nonatomic,retain) UIView *particleView;
 @property (nonatomic, assign) CGPoint velocity;
 @property (nonatomic, assign) CGPoint force;
 @property (nonatomic, assign) CGFloat tempMass;
