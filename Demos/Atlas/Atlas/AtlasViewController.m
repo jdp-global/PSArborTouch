@@ -30,20 +30,64 @@
 
 @implementation AtlasViewController
 
-@synthesize canvas = canvas_;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     
-    addNode = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addNode setFrame:CGRectMake(0, 10, 320, 46)];
+    
+   /* UIScrollView *mainSV = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0,320,320)];
+    [mainSV setBackgroundColor:[UIColor greenColor]];
+   // [mainSV setPagingEnabled:YES];
+    //[mainSV setDirectionalLockEnabled:YES];
+    [mainSV setShowsHorizontalScrollIndicator:YES];
+    [mainSV setShowsVerticalScrollIndicator:YES];
+   // [mainSV setDelegate:self];
+    [mainSV setContentSize:CGSizeMake(6000,6000)];
+    [mainSV setMinimumZoomScale:0.5];
+    [mainSV setMaximumZoomScale:3.0];
+    
+    [self.view addSubview:mainSV];
+    
+    // background - boy and girl
+    UIImageView *ballIV = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"soccer_ball"]];
+    [ballIV setFrame:CGRectMake(210,200,50 ,50)];
+    [mainSV addSubview:ballIV];
+*/
 
+    
+    CGRect frame = self.view.bounds;
+    frame.origin.y =44;
+    frame.size.height -=44;
+    frame.size.width -=100;
+    
+    canvas_ = [[AtlasCanvasView alloc]initWithFrame:frame];
+    
+    canvas_.autoresizesSubviews = YES;
+    canvas_.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
+    canvas_.showsHorizontalScrollIndicator = YES;
+    canvas_.showsVerticalScrollIndicator = YES;
+    
+    // [mainSV setDelegate:self];
+    [canvas_ setContentSize:CGSizeMake(6000,6000)];
+    [canvas_ setMinimumZoomScale:0.5];
+    [canvas_ setMaximumZoomScale:3.0];
+    [canvas_ setBackgroundColor:[UIColor blueColor]];
+    [self.view addSubview:canvas_];
+    UIButton *addNode = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addNode setFrame:CGRectMake(10, 50, 44, 44)];
     [addNode setBackgroundColor:[UIColor redColor]];
-
     [addNode addTarget:self action:@selector(addNodeClicked)  forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addNode];
+    
+  
+    UIButton *removeNode = [UIButton buttonWithType:UIButtonTypeCustom];
+    [removeNode setFrame:CGRectMake(10, 100, 44, 44)];
+    [removeNode setBackgroundColor:[UIColor redColor]];
+    [removeNode addTarget:self action:@selector(removeNodeClicked)  forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:removeNode];
+
     
     // Create our particle system
     system_ = [[ATSystem alloc] init];
@@ -60,7 +104,7 @@
     system_.parameters = params;
     
     // Setup the view bounds
-    system_.viewBounds = self.canvas.bounds;
+    system_.viewBounds = canvas_.bounds;
     
     // leave some space at the bottom and top for text
     system_.viewPadding = UIEdgeInsetsMake(60.0, 60.0, 60.0, 60.0);
@@ -72,18 +116,20 @@
     system_.delegate = self;
     
     // DEBUG
-    self.canvas.system = system_;
-    self.canvas.debugDrawing = NO;  // Do long press gesture to toggle.
+    canvas_.system = system_;
+    canvas_.debugDrawing = NO;  // Do long press gesture to toggle.
     
     // load the map data
     [self loadMapData];
+    [canvas_ updateParticleViews];
     
     // start the simulation
     [system_ start:YES];
     
     // set up touch event handling
-    [self addGestureRecognizersToCanvas:self.canvas];
+    //[self addGestureRecognizersToCanvas:canvas_];
 }
+
 
 - (void) viewDidUnload
 {
@@ -95,28 +141,13 @@
     [system_ release];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+
 
 - (void)dealloc {
     [canvas_ release];
     [super dealloc];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    if ( UIInterfaceOrientationIsLandscape(interfaceOrientation) ) {
-        return YES;
-    }
-    
-    return NO;
-}
 
 
 #pragma mark - Data Loading
@@ -193,7 +224,7 @@
 - (void) redraw
 {
     // Sync with screen refresh
-    [self.canvas setNeedsDisplay];
+    [canvas_ setNeedsDisplay];
 }
 
 
@@ -216,7 +247,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // simultaneously prevent other gesture recognizers from recognizing simultaneously
     
     // if the gesture recognizers's view isn't ours, don't allow simultaneous recognition
-    if (gestureRecognizer.view != self.canvas)
+    if (gestureRecognizer.view != canvas_)
         return NO;
     
     // if the gesture recognizers are on different views, don't allow simultaneous recognition
@@ -242,18 +273,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (void) addGestureRecognizersToCanvas:(UIView *)canvas
 {
-    // adds a set of gesture recognizers to the canvas
-    
-//    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self 
-//                                                                                                action:@selector(rotateHandler:)];
-//    [canvas addGestureRecognizer:rotationGesture];
-//    [rotationGesture release];
-//    
-//    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self 
-//                                                                                       action:@selector(pinchHandler:)];
-//    [pinchGesture setDelegate:self];
-//    [canvas addGestureRecognizer:pinchGesture];
-//    [pinchGesture release];
+  
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self 
                                                                                  action:@selector(panHandler:)]; // LOL !
@@ -295,7 +315,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (void) debugHandler:(UIMenuController *)controller
 {
-    self.canvas.debugDrawing = !self.canvas.debugDrawing;
+    canvas_.debugDrawing = !canvas_.debugDrawing;
 }
 
 - (BOOL) canBecomeFirstResponder
@@ -331,7 +351,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [system_ start:YES];
 }
 
-
+-(void)removeNodeClicked{
+    
+    uint32_t rnd0 = arc4random_uniform([system_.state.nodes count]);
+    ATNode *randomNode0 = [system_.state.nodes objectAtIndex:rnd0];
+    [system_ removeNode:randomNode0.name];
+    [canvas_ layoutSubviews];
+}
 -(void)addNodeClicked{
     NSLog(@"test");
 
@@ -350,19 +376,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // Does the edge already exist?
     ATEdge *to = [from objectForKey:dst];
      if (to != nil) {
-         uint32_t rndapha = arc4random_uniform(26);
          
-          NSArray *alphabet = [NSArray arrayWithObjects:@"A",@"B",@"C",@"D",@"E",@"F",@"G",@"H",@"I",@"J",
-                               @"K",@"L",@"M",@"N",@"O",@"P",@"Q",@"R",@"S",@"T"@"U",@"V",@"W",@"X",@"Y",@"Z",nil];
-         NSString *a = [alphabet objectAtIndex:rndapha];
-         
-          to = [from objectForKey:a];
-         if (to != nil) {
-           [self addNodeClicked]; //try another random node
-             return;
-         }
-         [system_ addEdgeFromNode:[a copy] toNode:[dstName copy] withData:nil];
-         [canvas_ layoutSubviews];
      }else{
          [system_ addEdgeFromNode:[srcName copy] toNode:[dstName copy] withData:nil];
          [canvas_ layoutSubviews];

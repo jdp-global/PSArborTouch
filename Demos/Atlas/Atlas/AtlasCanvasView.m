@@ -38,18 +38,13 @@
 @synthesize system = system_;
 @synthesize debugDrawing = debugDrawing_;
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code
-        NSLog(@"ok");
-      
-        
+-(id)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self!=nil){
+                
     }
     return self;
 }
-
 - (void) dealloc
 {
     [font_ release];
@@ -58,33 +53,34 @@
     [super dealloc];
 }
 
-- (void) layoutSubviews
-{
-    // Handle size changes
-  
+//call this once after the particles are setup
+-(void)updateParticleViews{
     
-    //CGRect frame = self.frame;
-    self.autoresizesSubviews = YES;
-    self.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
-    self.showsHorizontalScrollIndicator = YES;
-    self.showsVerticalScrollIndicator = YES;
-    [self setBackgroundColor:[UIColor blueColor]];
-    [self setContentSize:CGSizeMake(2000, 2000)];
-    self.system.viewBounds = self.bounds;
-    
-    
-    // Drawing code for particle centers
-    //need to move this to into init
     for (ATParticle *particle in self.system.physics.particles) {
         [particle.particleView removeFromSuperview];
     }
     
     for (ATParticle *particle in self.system.physics.particles) {
-    
+        
         [self addSubview:particle.particleView];
+
+        UILabel *lblNode =	[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, 20)] ;
+        lblNode.text =  particle.name;
+        lblNode.shadowColor = [UIColor whiteColor];
+        lblNode.font = [UIFont systemFontOfSize:18];
+        lblNode.backgroundColor = [UIColor clearColor];
+        lblNode.numberOfLines = 0;
+        lblNode.textColor =[UIColor colorWithRed:0.000 green:0.200 blue:0.357 alpha:1.000];
+        lblNode.lineBreakMode = UILineBreakModeWordWrap;
+		[lblNode sizeToFit];
+        [particle.particleView addSubview:lblNode];
+
+        
     }
 
 }
+
+
 
 - (void) drawRect:(CGRect)rect
 {
@@ -118,7 +114,7 @@
             [self drawOutlineWithContext:context andRect:[self scaleRect:self.system.tweenBoundsCurrent]];
         }
         
-        CGContextSetRGBStrokeColor(context, 0.0, 0.0, 0.0, 1.0); // black line
+        CGContextSetRGBStrokeColor(context, 1.0, 1.0, 1.0, 1.0); // black line
         CGContextSetLineWidth(context, 1.0);
         
         // Drawing code for springs

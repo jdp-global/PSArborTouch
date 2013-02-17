@@ -21,5 +21,5 @@
 
 @property (nonatomic, retain) ATSystem *system;
 @property (nonatomic, assign, getter=isDebugDrawing) BOOL debugDrawing;
-
+-(void)updateParticleViews;
 @end

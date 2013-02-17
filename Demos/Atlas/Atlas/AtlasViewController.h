@@ -15,13 +15,13 @@
 
 @interface AtlasViewController : UIViewController <ATDebugRendering, UIGestureRecognizerDelegate>
 {
-    UIButton *addNode;
+    
 
 @private
     ATSystem    *system_;
     AtlasCanvasView *canvas_;
 }
 
-@property (nonatomic, retain) IBOutlet AtlasCanvasView *canvas;
+//@property (nonatomic, retain) IBOutlet AtlasCanvasView *canvas;
 
 @end
