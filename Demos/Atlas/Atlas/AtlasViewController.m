@@ -44,16 +44,19 @@
     
     canvas_ = [[AtlasCanvasView alloc]initWithFrame:frame];
     canvas_.autoresizesSubviews = YES;
-    canvas_.delegate = self;
+   
     canvas_.autoresizingMask = UIViewAutoresizingFlexibleHeight |UIViewAutoresizingFlexibleWidth;
+    
+    //scrollview
+    canvas_.delegate = self;
     canvas_.showsHorizontalScrollIndicator = YES;
     canvas_.showsVerticalScrollIndicator = YES;
-    
-    // [mainSV setDelegate:self];
     [canvas_ setContentSize:CGSizeMake(6000,6000)];
     [canvas_ setMinimumZoomScale:0.5];
     [canvas_ setMaximumZoomScale:3.0];
     [canvas_ setBackgroundColor:[UIColor blueColor]];
+    
+    
     [self.view addSubview:canvas_];
     UIButton *addNode = [UIButton buttonWithType:UIButtonTypeCustom];
     [addNode setFrame:CGRectMake(10, 50, 44, 44)];
@@ -101,7 +104,8 @@
     
     // load the map data
     [self loadMapData];
-    [canvas_ updateParticleViews];
+    [canvas_ performSelector:@selector(updateParticleViews) withObject:nil afterDelay:5];
+//    [canvas_ updateParticleViews];
     
     // start the simulation
     [system_ start:YES];
@@ -113,7 +117,7 @@
 
 - (void) viewDidUnload
 {
-    [self setCanvas:nil];
+   
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -341,7 +345,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    NSLog(@"scrollViewWillBeginDragging");
+   // NSLog(@"scrollViewWillBeginDragging");
 
 }
 
@@ -352,6 +356,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
     
 }
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+    return YES;
+}
+
 
 -(void)removeNodeClicked{
     
@@ -388,32 +396,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 
-
-//- (void) rotateHandler:(UIRotationGestureRecognizer *)gestureRecognizer
-//{
-//    // rotate handler
-//    
-//    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || 
-//        [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
-//            [gestureRecognizer view].transform = CGAffineTransformRotate([[gestureRecognizer view] transform], 
-//                                                                         [gestureRecognizer rotation]);
-//            [gestureRecognizer setRotation:0];
-//    }
-//}
-//
-//
-//- (void) pinchHandler:(UIPinchGestureRecognizer *)gestureRecognizer
-//{
-//    // pinch / scale handler
-//    
-//    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan || 
-//        [gestureRecognizer state] == UIGestureRecognizerStateChanged) {
-//            [gestureRecognizer view].transform = CGAffineTransformScale([[gestureRecognizer view] transform], 
-//                                                                        [gestureRecognizer scale], 
-//                                                                        [gestureRecognizer scale]);
-//            [gestureRecognizer setScale:1];
-//    }
-//}
 
 
 @end

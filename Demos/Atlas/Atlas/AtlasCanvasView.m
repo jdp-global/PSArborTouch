@@ -155,8 +155,36 @@
         
         
     }
+    
 }
 
+/*
+- (UIView *) hitTest:(CGPoint) point withEvent:(UIEvent *)event {
+
+    NSLog(@"pt x:%f", point.x);
+    NSLog(@"pt y:%f", point.y);
+    
+    for (ATParticle *particle in self.system.physics.particles) {
+        //[ removeFromSuperview];
+       // particle.position
+        NSLog(@"particle x:%f",[self pointToScreen:particle.position].x);
+        NSLog(@"particle y:%f",[self pointToScreen:particle.position].y);
+        
+        float x1 = point.x - [self pointToScreen:particle.position].x;
+        float y1 = point.y - [self pointToScreen:particle.position].y;
+        
+        if (abs(x1) + abs(y1) < 50) {
+            return nil;
+        }
+  
+        
+    }
+    
+    if ([self pointInside:point withEvent:event]) {
+        return self;
+    }
+    return nil;
+}*/
 
 
 
